@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="auto_landed_purchase_order_form_mod">
+      <field name="name">x_jos.purchase.order.form.mod</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="priority">99</field>
+      <field name="arch" type="xml">
+          <xpath expr="//notebook" position="inside">
+            <page string="Landed Costs">
+              <group>
+                <field nolabel="1" name="x_landed_cost_lines" context="{'default_x_purchase_id':active_id}">
+                  <tree editable="bottom">
+                    <field name="x_purchase_id" invisible="1"/>
+                    <field name="x_product_id"/>
+                    <field name="x_name"/>
+                    <field name="x_account_id"/>
+                    <field name="x_split_method"/>
+                    <field name="x_price_unit"/>
+                  </tree>
+                </field>
+              </group>
+            </page>
+          </xpath>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="auto_landed_stock_picking_form_mod">
+      <field name="name">x_jos.stock.picking.form.mod</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="priority">99</field>
+      <field name="arch" type="xml">
+          <xpath expr="//header" position="inside">
+            <field name="x_landed_cost_calculated" invisible="1"/>
+            <button name="%(action_calculate_landed_cost)d" type="action" string="Calculate Landed Costs" class="oe_highlight" attrs="{'invisible': ['|',('state', 'not in', ('done')),('x_landed_cost_calculated','=',True)]}"/>
+          </xpath>
+      </field>
+    </record>
+</odoo>

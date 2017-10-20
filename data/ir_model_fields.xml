@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- AUTO LANDED FIELDS-->
+    <record model="ir.model.fields" id="automated_lc_product">
+        <field name="field_description">Product</field>
+        <field name="name">x_product_id</field>
+        <field name="model">x_auto_landed</field>
+        <field name="model_id" ref="sm_automated_lc.model_auto_landed" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="relation">product.product</field>
+        <field name="ttype">many2one</field>
+    </record>
+    <record model="ir.model.fields" id="automated_lc_purchase">
+        <field name="field_description">Purchase Order</field>
+        <field name="name">x_purchase_id</field>
+        <field name="model">x_auto_landed</field>
+        <field name="model_id" ref="sm_automated_lc.model_auto_landed" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="relation">purchase.order</field>
+        <field name="ttype">many2one</field>
+    </record>
+    <record model="ir.model.fields" id="automated_lc_account">
+        <field name="field_description">Account</field>
+        <field name="name">x_account_id</field>
+        <field name="model">x_auto_landed</field>
+        <field name="model_id" ref="sm_automated_lc.model_auto_landed" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="relation">account.account</field>
+        <field name="ttype">many2one</field>
+    </record>
+    <record model="ir.model.fields" id="automated_lc_product">
+        <field name="field_description">Product</field>
+        <field name="name">x_product_id</field>
+        <field name="model">x_auto_landed</field>
+        <field name="model_id" ref="sm_automated_lc.model_auto_landed" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="relation">product.product</field>
+        <field name="ttype">many2one</field>
+    </record>
+    <record model="ir.model.fields" id="automated_lc_name">
+        <field name="field_description">Description</field>
+        <field name="name">x_name</field>
+        <field name="model">x_auto_landed</field>
+        <field name="model_id" ref="sm_automated_lc.model_auto_landed" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="ttype">char</field>
+    </record>
+    <record model="ir.model.fields" id="automated_lc_price">
+        <field name="field_description">Cost</field>
+        <field name="name">x_price_unit</field>
+        <field name="model">x_auto_landed</field>
+        <field name="model_id" ref="sm_automated_lc.model_auto_landed" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="ttype">float</field>
+    </record>
+    <record model="ir.model.fields" id="automated_lc_split">
+        <field name="field_description">Split Method</field>
+        <field name="name">x_split_method</field>
+        <field name="model">x_auto_landed</field>
+        <field name="model_id" ref="sm_automated_lc.model_auto_landed" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="selection">[['equal', 'Equal'], ['by_quantity', 'By Quantity'], ['by_current_cost_price', 'By Current Cost'], ['by_weight', 'By Weight'], ['by_volume', 'By Volume']]</field>
+        <field name="ttype">selection</field>
+    </record>
+    <!--PURCHASE ORDER FIELDS-->
+    <record model="ir.model.fields" id="purchase_landed_lines">
+        <field name="field_description">Landed Cost Lines</field>
+        <field name="name">x_landed_cost_lines</field>
+        <field name="model">purchase.order</field>
+        <field name="model_id" ref="purchase.model_purchase_order" />
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="relation">x_auto_landed</field>
+        <field name="relation_field">x_purchase_id</field>
+        <field name="ttype">one2many</field>
+    </record>
+    <!--STOCK PICKING FIELDS-->
+    <record model="ir.model.fields" id="picking_landed_calculated">
+        <field name="field_description">Landed Cost Calculated</field>
+        <field name="name">x_landed_cost_calculated</field>
+        <field name="model">stock.picking</field>
+        <field name="model_id" ref="stock.model_stock_picking"/>
+        <field name="on_delete">set null</field>
+        <field name="selectable" eval="True"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="readonly" eval="False"/>
+        <field name="ttype">boolean</field>
+    </record>
+  </data>
+</odoo>
