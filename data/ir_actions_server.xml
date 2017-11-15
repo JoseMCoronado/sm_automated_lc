@@ -12,7 +12,11 @@
     <field name="code"><![CDATA[
 if record.purchase_id and record.purchase_id.x_landed_cost_lines and record.x_landed_cost_calculated != True:
     lines = record.purchase_id.x_landed_cost_lines
-    landed_cost = record.env['stock.landed.cost'].create({'name': record.name, 'account_journal_id':3, 'picking_ids':[(6,0,[record.id])]})
+    stock_journal_field_id = record.env['ir.model.data'].sudo().get_object('stock_account', 'field_product_category_property_stock_journal').id
+    company_property_value = record.env['ir.property'].sudo().search([('fields_id','=',stock_journal_field_id),('company_id','=',record.company_id.id)],limit=1).value_reference
+    values = company_property_value.split(',')
+    journal_id = values[1]
+    landed_cost = record.env['stock.landed.cost'].create({'name': record.name, 'account_journal_id':journal_id, 'picking_ids':[(6,0,[record.id])]})
     for l in lines:
         vals = {
                 'product_id': l.x_product_id.id,
